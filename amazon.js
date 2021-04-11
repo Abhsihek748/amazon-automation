@@ -71,7 +71,7 @@ async function addToCart(){
     for(let i in products){
         addProduct(products[i],await browser.newPage());
     }
-    console.log("x");
+ 
 }
 async function addProduct(productName,tab){
   
