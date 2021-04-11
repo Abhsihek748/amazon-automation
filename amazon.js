@@ -30,6 +30,7 @@ let pages = await browser.pages();
  tab = pages[0];
 await tab.goto("https://www.amazon.in");
 
+await tab.waitForTimeout(1000);
 await login();
 await addAddress();
 await addToCart();
@@ -52,7 +53,8 @@ async function login(){
  
 }
 async function addAddress(){
-    await tab.goto("https://www.amazon.in/a/addresses/add?ref=ya_address_book_add_button");
+    await tab.goto("https://www.amazon.in/a/addresses?alertId=yaab-deleteAddressSuccess");
+    await tab.click(".a-box.first-desktop-address-tile");
     await tab.waitForSelector(".a-section.a-spacing-micro.adddress-ui-widgets-form-field-container.address-ui-widgets-desktop-form-field");
     let addressButtons = await tab.$$(".a-section.a-spacing-micro.adddress-ui-widgets-form-field-container.address-ui-widgets-desktop-form-field input");
       
