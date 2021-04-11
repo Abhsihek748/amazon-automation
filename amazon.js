@@ -1,5 +1,5 @@
 const pup = require("puppeteer");                                     
-let id = "ajaakaj.j@gmail.com";
+let id = "ajaa.kajj@gmail.com";
 let password = "123456";
 let tab;
 let browser;
@@ -45,7 +45,10 @@ async function login(){
    await tab.waitForSelector(".a-section.a-spacing-large");
    await tab.type(".a-section.a-spacing-large input",password);
    await tab.click("#signInSubmit");
-   await tab.waitForSelector(".nav-a.nav-a-2.nav-progressive-attribute")
+   await tab.waitForSelector(".nav-a.nav-a-2.nav-progressive-attribute");
+   await tab.goto("https://www.amazon.in/gp/cart/view.html?");
+   await tab.waitForTimeout(1000);
+
  
 }
 async function addAddress(){
@@ -93,25 +96,25 @@ async function addProduct(productName,tab){
 }
 
 async function checkout(tab){
-    await tab.waitForTimeout(2000);
+    await tab.waitForTimeout(1000);
     await tab.goto("https://www.amazon.in/gp/cart/view.html?");
     await tab.waitForSelector(".a-button-input");
     let checkOutButton = await tab.$$(".a-button-input");
-    checkOutButton[0].click();
+    await checkOutButton[0].click();
     await tab.waitForSelector(".a-declarative.a-button-text");
-    let deliverButton = await tab.$$(".a-declarative.a-button-text");
-    deliverButton[0].click();
+    let deliverButton = await tab.$$(".a-button-inner a");
+    await deliverButton[0].click();
     await tab.waitForSelector(".a-button-text");
     let continueButton = await tab.$$(".a-button-text");
-    continueButton[0].click();
+    await continueButton[0].click();
     await tab.waitForSelector(".a-box-inner.a-padding-small");
     let CODButton = await tab.$$(".a-box-inner.a-padding-small");
     CODButton[4].click();
      continueButton = await tab.$$(".a-button.a-button-span12.a-button-primary.pmts-button-input");
-    continueButton[0].click();
+    await continueButton[0].click();
     await tab.waitForSelector("#placeYourOrder");
     let placeOrderButton = await tab.$$("#placeYourOrder");
-    placeOrderButton[0].click();    
+    await placeOrderButton[0].click();    
    
 }
 main()
